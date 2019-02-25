@@ -1,0 +1,128 @@
+<div class="container mt-50">
+  <div class="col-md-10 offset-1">
+    <div class="card">
+      <div class="card-title  bg-primary text-white">Create Employee</div>
+      <div class="card-body">
+        <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+          <div class="form-group" [ngClass]="{'is-invalid' : formErrors.fullName }">
+            <label for="name">Full name:</label>
+            <input type="text" class="form-control" 
+              id="fullName" formControlName="fullName" (blur)="logValidationErrors()">
+            <!-- <label> {{fullNameLength}} </label><br/> -->
+            <span class="is-error" *ngIf="formErrors.fullName ">
+             {{formErrors.fullName}}
+            </span>
+          </div>
+
+          <div class="form-group">
+              <label class="control-label">Contact preference:</label><br />
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" value="email" formControlName="contactPreference" class="form-check-input"
+                 >
+                  Email
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" value="intermediate" formControlName="contactPreference" class="form-check-input"
+                  >
+                  Phone
+                </label>
+              </div>
+            </div>
+
+          <div class="form-group" [ngClass]="{'is-invalid' : formErrors.email }">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email" formControlName="email" (blur)="logValidationErrors()">
+            <span class="is-error" *ngIf="formErrors.email ">
+                {{formErrors.email}}
+               </span>
+          </div>
+          
+          <div class="form-group" [ngClass]="{'is-invalid' : formErrors.phone }">
+              <label for="email">Phone Number:</label>
+              <input type="text" class="form-control" id="phone" formControlName="phone" (blur)="logValidationErrors()">
+              <span class="is-error" *ngIf="formErrors.phone ">
+                  {{formErrors.phone}}
+                 </span>
+            </div>
+
+          <div formGroupName="skills">
+            <div class="row">
+              <label class="control-label col-md-1">Skill:</label><br />
+              <div class="col-md-6 form-group" [ngClass]="{'is-invalid' : formErrors.skillName }">
+                <input type="text" id="skillName" formControlName="skillName" class="form-control" placeholder="Skill Name" 
+                (blur)="logValidationErrors()">
+                <span class="is-error" *ngIf="formErrors.skillName ">
+                    {{formErrors.skillName}}
+                   </span>
+              </div>
+              <div class="col-md-5 form-group" [ngClass]="{'is-invalid' : formErrors.experienceInYears }">
+                <input type="text" id="experienceInYear" formControlName="experienceInYears" placeholder="Experience in year"
+                  class="form-control" (blur)="logValidationErrors()">
+                  <span class="is-error" *ngIf="formErrors.experienceInYears ">
+                      {{formErrors.experienceInYears}}
+                     </span>
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{'is-invalid' : formErrors.proficiency }">
+              <label class="control-label">Proficiency:</label><br />
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" value="beginner" formControlName="proficiency" class="form-check-input"
+                  (blur)="logValidationErrors()">
+                  Beginner
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" value="intermediate" formControlName="proficiency" class="form-check-input"
+                  (blur)="logValidationErrors()">
+                  Intermediate
+                </label>
+              </div>
+              <div class="form-check-inline disabled">
+                <label class="form-check-label">
+                  <input type="radio" value="advanced" formControlName="proficiency" class="form-check-input"
+                  (blur)="logValidationErrors()">
+                   Advanced
+                </label>
+              </div>
+              <span class="is-error" *ngIf="formErrors.proficiency ">
+                  {{formErrors.proficiency}}
+                 </span>
+            </div>
+          </div>
+          <div class="btn-group mr-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" (click)="onLoadDataClick()">Load Data</button>
+          </div>
+        </form>
+        <br /><br />
+        <table class="table table-bordered">
+          <tr>
+            <th>FromGroup</th>
+            <th>FromControl (fullName)</th>
+          </tr>
+          <tr>
+            <td>
+              <div>Touched: {{ employeeForm.touched }}</div>
+              <div>dirty: {{ employeeForm.dirty }}</div>
+              <div>valid: {{ employeeForm.valid }}</div>
+              <div>form values: {{ employeeForm.value | json }}</div>
+            </td>
+            <td>
+              <div>Touched: {{ employeeForm.get('fullName').touched }}</div>
+              <div>dirty: {{ employeeForm.get('fullName').dirty }}</div>
+              <div>valid: {{ employeeForm.get('fullName').valid }}</div>
+              <div>full name values: {{ employeeForm.get('fullName').value }}</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
